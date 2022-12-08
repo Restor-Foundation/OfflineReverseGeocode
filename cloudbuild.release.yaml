@@ -1,0 +1,40 @@
+steps:
+  - name: 'gcr.io/cloud-builders/mvn'
+    entrypoint: 'bash'
+    args:
+      - -c
+      - |
+        echo "$$SSH_KEY" > /root/.ssh/id_rsa
+        chmod 400 /root/.ssh/id_rsa
+        
+        ssh-keyscan -t rsa github.com >> /root/.ssh/known_hosts
+        
+        git config --global user.name restor-bot
+        git config --global user.email restor-bot@restor.eco
+        git branch -m $BRANCH_NAME
+        git remote set-url origin git@github.com:Restor-Foundation/OfflineReverseGeocode.git
+    secretEnv: ['SSH_KEY']
+    volumes:
+      - name: 'ssh'
+        path: /root/.ssh
+
+  - name: 'gcr.io/cloud-builders/mvn'
+    args: ['--batch-mode', 'release:prepare', '-DscmCommentPrefix=[maven-release-plugin] [skip ci]']
+    volumes:
+      - name: 'ssh'
+        path: /root/.ssh
+
+  - name: 'gcr.io/cloud-builders/mvn'
+    args: ['release:perform']
+    volumes:
+      - name: 'ssh'
+        path: /root/.ssh
+
+options:
+  machineType: N1_HIGHCPU_8
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/$PROJECT_ID/secrets/OfflineReverseGeocode-deploy-token/versions/latest
+      env: 'SSH_KEY'
+

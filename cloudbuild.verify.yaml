@@ -1,0 +1,6 @@
+steps:
+  - name: 'gcr.io/cloud-builders/mvn'
+    args: ['test']
+
+options:
+  machineType: N1_HIGHCPU_8
