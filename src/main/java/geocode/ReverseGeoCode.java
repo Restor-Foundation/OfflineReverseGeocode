@@ -86,13 +86,11 @@ public class ReverseGeoCode {
         try {
             while ((str = in.readLine()) != null) {
                 GeoName newPlace = new GeoName(str);
-                if ( !majorOnly || newPlace.majorPlace ) {
-                    arPlaceNames.add(newPlace);
-                }
+                arPlaceNames.add(newPlace);
             }
         } catch (IOException ex) {
             throw ex;
-        }finally{
+        } finally{
             in.close();
         }
         kdTree = new KDTree<GeoName>(arPlaceNames);
