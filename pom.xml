@@ -5,7 +5,7 @@
     <groupId>OfflineReverseGeocode</groupId>
     <artifactId>OfflineReverseGeocode</artifactId>
     <packaging>jar</packaging>
-    <version>2-SNAPSHOT</version>
+    <version>2</version>
     <name>Offline Reverse Geocoding Java library</name>
     <url>http://github.com/Restor-Foundation/OfflineReverseGeocode</url>
 
@@ -13,7 +13,7 @@
         <connection>scm:git:git@github.com:Restor-Foundation/OfflineReverseGeocode.git</connection>
         <developerConnection>scm:git:git@github.com:Restor-Foundation/OfflineReverseGeocode.git</developerConnection>
         <url>http://github.com/Restor-Foundation/OfflineReverseGeocode</url>
-        <tag>HEAD</tag>
+        <tag>OfflineReverseGeocode-2</tag>
     </scm>
 
     <properties>
